@@ -15,7 +15,7 @@
 
     <body>
         <h1>Edit <%- todo %>:</h1>
-        <form action="/todo/edit/<%= todoIdx %>" method="post">
+        <form action="/edit/<%= todoIdx %>" method="post">
             <p>
                 <label for="editTodo">Change to:</label>
                 <input type="hidden" name="_method" value="PUT">

@@ -24,7 +24,7 @@ app.use(methodOverride(function (req, res) {
 let todolist = [];
 
 /* The to do list and the form are displayed */
-app.get('/todo', function (req, res) {
+app.get('/', function (req, res) {
         res.render('todo.ejs', {
             todolist,
             clickHandler: "func1();"
@@ -32,25 +32,25 @@ app.get('/todo', function (req, res) {
     })
 
     /* Adding an item to the to do list */
-    .post('/todo/add/', function (req, res) {
+    .post('/add/', function (req, res) {
         // Escapes HTML special characters in attribute values as HTML entities
         let newTodo = sanitizer.escape(req.body.newtodo);
         if (req.body.newtodo != '') {
             todolist.push(newTodo);
         }
-        res.redirect('/todo');
+        res.redirect('/');
     })
 
     /* Deletes an item from the to do list */
-    .get('/todo/delete/:id', function (req, res) {
+    .get('/delete/:id', function (req, res) {
         if (req.params.id != '') {
             todolist.splice(req.params.id, 1);
         }
-        res.redirect('/todo');
+        res.redirect('/');
     })
 
     // Get a single todo item and render edit page
-    .get('/todo/:id', function (req, res) {
+    .get('/:id', function (req, res) {
         let todoIdx = req.params.id;
         let todo = todolist[todoIdx];
 
@@ -61,22 +61,22 @@ app.get('/todo', function (req, res) {
                 clickHandler: "func1();"
             });
         } else {
-            res.redirect('/todo');
+            res.redirect('/');
         }
     })
 
     // Edit item in the todo list 
-    .put('/todo/edit/:id', function (req, res) {
+    .put('/edit/:id', function (req, res) {
         let todoIdx = req.params.id;
         // Escapes HTML special characters in attribute values as HTML entities
         let editTodo = sanitizer.escape(req.body.editTodo);
         if (todoIdx != '' && editTodo != '') {
             todolist[todoIdx] = editTodo;
         }
-        res.redirect('/todo');
+        res.redirect('/');
     })
     .use(function (req, res, next) {
-        res.redirect('/todo');
+        res.redirect('/');
     })
 
     .listen(port, function () {
