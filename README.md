@@ -8,4 +8,4 @@ Run these commands:
 
 `npm install`
 
-`node app.js` or `nodemon`
+`node app.js`
