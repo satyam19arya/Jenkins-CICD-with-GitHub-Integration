@@ -13,7 +13,7 @@
     "start": "node app.js",
     "test": "mocha --recursive --exit"
   },
-  "author": "riaan@entersekt.com",
+  "author": "satyam19arya@gmail.com",
   "description": "Basic to do list exercise",
   "devDependencies": {
     "chai": "^4.2.0",
