@@ -6,6 +6,6 @@ Run these commands:-
 `sudo apt install npm`
 
 
-`npm install`
+`sudo npm install`
 
 `node app.js`
