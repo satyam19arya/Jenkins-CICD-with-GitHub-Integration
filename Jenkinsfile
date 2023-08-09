@@ -22,6 +22,11 @@ pipeline {
         stage("Push to Docker Hub") {
             steps {
                 echo "Pushing the image to Docker Hub"
+                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+                sh "docker tag node-app ${env.dockerHubUser}/node-app:latest"
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker push ${env.dockerHubUser}/node-app:latest"
+                }
             }
         }
         
@@ -37,10 +42,10 @@ pipeline {
         echo 'Pipeline execution completed'
       }
       success {
-        echo 'Successfully executed the pipeline'
+        echo 'Successfully deployed the application'
       }
       failure {
-        echo 'The pipeline is failed'
+        echo 'Deployment failed'
       }
     }
 }
